@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <!-- viewport는 모바일/태블릿/PC에서 CSS가 실제 기기 너비를 기준으로 반응하도록 해 주는 기본 설정입니다. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CineScore - 영화 포털</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!--
+    header는 페이지 상단의 반복 영역을 의미하는 시맨틱 태그입니다.
+    data-route와 data-action은 JavaScript가 "어떤 버튼을 눌렀는지" 구분하기 위해 읽는 사용자 정의 속성입니다.
+  -->
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="CineScore 홈">
+      <span class="brand-mark">●●<i>●</i><b>●</b></span>
+      <span>Cine<span>Score</span></span>
+    </a>
+    <nav class="main-nav" aria-label="주요 메뉴">
+      <a href="#home" data-route="home">홈</a>
+      <a href="#boxoffice" data-route="home">박스오피스</a>
+      <a href="#search" data-route="search" data-search-mode="genre">장르</a>
+      <a href="#search" data-route="search" data-search-mode="country">국가</a>
+      <a href="#mypage" data-route="mypage">마이페이지</a>
+    </nav>
+    <form class="search-bar" id="topSearch">
+      <input id="globalSearch" type="search" placeholder="영화 제목, 감독, 배우를 검색하세요" value="">
+      <button type="submit" aria-label="검색">⌕</button>
+    </form>
+    <div class="header-actions">
+      <button class="ghost" data-route="mypage" data-tab="watchlist">찜한 영화</button>
+      <button class="ghost" data-route="recent">최근 본 영화</button>
+      <button class="ghost" data-route="mypage">내 보관함</button>
+    </div>
+  </header>
+
+  <!--
+    main은 문서의 핵심 콘텐츠 영역입니다.
+    이 프로젝트는 SPA처럼 동작하므로 JavaScript가 현재 메뉴에 맞는 화면을 #app 안에 교체해서 그립니다.
+  -->
+  <main id="app"></main>
+
+  <!--
+    template 태그는 브라우저에 바로 표시되지 않는 HTML 설계도입니다.
+    JavaScript가 cloneNode(true)로 복사해서 영화 카드, 순위 카드, 빈 상태를 만들기 때문에
+    반복 UI의 뼈대가 script.js 문자열 안에만 숨어 있지 않고 HTML 파일에도 드러납니다.
+  -->
+  <template id="movie-card-template">
+    <article class="movie-card" data-action="open-detail" data-id="">
+      <img class="poster" src="" alt="" loading="lazy">
+      <button class="card-control bookmark" type="button" data-action="toggle-watch" data-id="" aria-label="찜">♡</button>
+      <strong class="movie-title"></strong>
+      <span class="movie-genres"></span>
+      <span class="score movie-score"></span>
+      <span class="movie-meta"></span>
+      <span class="movie-director"></span>
+    </article>
+  </template>
+
+  <template id="movie-strip-template">
+    <article class="movie-strip-card" data-action="open-detail" data-id="">
+      <img class="poster" src="" alt="" loading="lazy">
+      <strong class="movie-title"></strong>
+      <span class="score movie-score"></span>
+    </article>
+  </template>
+
+  <template id="rank-item-template">
+    <article class="rank-item" data-action="open-detail" data-id="">
+      <b class="rank"></b>
+      <img class="poster" src="" alt="" loading="lazy">
+      <div class="rank-info">
+        <strong class="movie-title"></strong>
+        <span class="rank-subtitle">월드 박스오피스</span>
+        <span class="rank-boxoffice"></span>
+      </div>
+    </article>
+  </template>
+
+  <template id="empty-state-template">
+    <div class="empty" role="status"></div>
+  </template>
+
+  <!-- footer도 모든 화면에서 반복되는 하단 정보 영역이라 HTML에 고정해 둡니다. -->
+  <footer class="site-footer">
+    <div class="footer-brand">
+      <span class="brand-mark">●●<i>●</i><b>●</b></span>
+      <strong>Cine<span>Score</span></strong>
+      <small>영화를 기록하고, 평점을 공유하다</small>
+    </div>
+    <a href="#">이용약관</a>
+    <a href="#">개인정보처리방침</a>
+    <a href="#">문의하기</a>
+    <p>© 2024 CineScore. All rights reserved.</p>
+    <div class="socials" aria-label="소셜 링크">
+      <span>▶</span><span>◎</span><span>𝕏</span><span>f</span>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
